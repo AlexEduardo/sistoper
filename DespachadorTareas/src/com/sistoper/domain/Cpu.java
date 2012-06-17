@@ -13,7 +13,7 @@ public class Cpu {
     private Proceso proceso = null;
     
     private Integer id;
-
+    
     public Integer getId() {
         return id;
     }
