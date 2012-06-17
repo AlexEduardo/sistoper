@@ -4,6 +4,8 @@
  */
 package com.sistoper.domain;
 
+import com.sistoper.utils.EstadoProceso;
+
 /**
  *
  * @author D314721
@@ -20,7 +22,7 @@ public class Proceso {
     
     private String prioridad;
     
-    private String estado;
+    private EstadoProceso estado;
     
     private Integer tiempoEjecucion;
     
@@ -30,7 +32,7 @@ public class Proceso {
         this.programa = programa;
     }
 
-    public Proceso(Integer id, String nombre, String prioridad, String estado, Integer tiempoEjecucion) {
+    public Proceso(Integer id, String nombre, String prioridad, EstadoProceso estado, Integer tiempoEjecucion) {
         this.id = id;
         this.nombre = nombre;
         this.prioridad = prioridad;
@@ -46,11 +48,11 @@ public class Proceso {
         this.cpu = cpu;
     }
 
-    public String getEstado() {
+    public EstadoProceso getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public synchronized void setEstado(EstadoProceso estado) {
         this.estado = estado;
     }
 
@@ -74,7 +76,7 @@ public class Proceso {
         return prioridad;
     }
 
-    public void setPrioridad(String prioridad) {
+    public synchronized void setPrioridad(String prioridad) {
         this.prioridad = prioridad;
     }
 
@@ -98,7 +100,7 @@ public class Proceso {
         return tiempoEjecutado;
     }
 
-    public void setTiempoEjecutado(Integer tiempoEjecutado) {
+    public synchronized void setTiempoEjecutado(Integer tiempoEjecutado) {
         this.tiempoEjecutado = tiempoEjecutado;
     }
     
