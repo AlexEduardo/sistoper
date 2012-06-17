@@ -13,5 +13,20 @@ public class Cpu {
     private Proceso proceso = null;
     
     private Integer id;
-    
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Proceso getProceso() {
+        return proceso;
+    }
+
+    public void setProceso(Proceso proceso) {
+        this.proceso = proceso;
+    }
 }
