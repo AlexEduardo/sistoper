@@ -7,6 +7,7 @@ package com.sistoper.business;
 import com.sistoper.domain.Cpu;
 import com.sistoper.domain.Proceso;
 import com.sistoper.domain.Programa;
+import com.sistoper.utils.EstadoProceso;
 import java.util.List;
 
 /**
@@ -23,8 +24,9 @@ public class Despachador implements IDespachador {
     
     private Cpu cpu = null;
     
-    private Despachador () {
-        
+    private Integer quantum = 1000;
+    
+    private Despachador () {        
     }
     
     public static Despachador getDespachador() {
@@ -35,9 +37,9 @@ public class Despachador implements IDespachador {
     }
     
     
-    public void crearProceso(Integer id, String nombre, String prioridad, String estado, Integer tiempoEjecucion) {
+    public Proceso crearProceso(Integer id, String nombre, String prioridad, EstadoProceso estado, Integer tiempoEjecucion) {
         Proceso proceso = new Proceso(id,nombre,prioridad,estado,tiempoEjecucion);
-        this.encolarProceso(proceso);
+        return proceso;
     }
     
     public void encolarProceso (Proceso proceso) {
@@ -45,12 +47,28 @@ public class Despachador implements IDespachador {
     }
     
     public void asignarProcesoProcesador () {
-        Proceso proceso = this.obtenerProximoProceso();
+        Proceso proceso = this.obtenerProximoProcesoAEjecutar();
         this.cpu.setProceso(proceso);
         proceso.setCpu(this.cpu);
     }
     
-    public Proceso obtenerProximoProceso() {
+    public Proceso obtenerProximoProcesoAEjecutar() {
         return null;
+    }
+    
+    public Proceso obtenerProcesoEjecucion() {
+        return this.cpu.getProceso();
+    }
+    
+    public List<Proceso> obtenerColaProcesos () {
+        return this.colaProcesos;
+    }
+    
+    public List<Programa> obtenerListadoProgramas () {
+        return this.listadoProgramas;
+    }
+    
+    public void setQuantum(Integer quantum) {
+        this.quantum = quantum;
     }
 }
