@@ -29,6 +29,8 @@ import javax.swing.JOptionPane;
 public class DespachadorTareasView extends FrameView {
     
     private frmAdministradorProcesos administrador;
+    
+    private SimuladorDespacho simuladorDespacho = null;
 
     public DespachadorTareasView(SingleFrameApplication app) {
         super(app);
@@ -272,14 +274,17 @@ private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 // TODO add your handling code here:
-    SimuladorDespacho simulador = SimuladorDespacho.getSimuladorDespacho(true);
-    simulador.start();
+    if (simuladorDespacho == null || !simuladorDespacho.isAlive()) {
+        simuladorDespacho = new SimuladorDespacho(true);
+        simuladorDespacho.start();
+    }    
 }//GEN-LAST:event_jMenuItem2ActionPerformed
 
 private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
 // TODO add your handling code here:
-    SimuladorDespacho simulador = SimuladorDespacho.getSimuladorDespacho(true);
-    simulador.setPrendido(false);
+    if (simuladorDespacho != null && simuladorDespacho.isAlive()) {
+        simuladorDespacho.setPrendido(false);
+    }    
 }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

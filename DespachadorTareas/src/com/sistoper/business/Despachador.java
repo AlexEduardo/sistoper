@@ -25,7 +25,7 @@ public class Despachador implements IDespachador {
     private List<Proceso> colaProcesosFinalizados = null;
     private List<Programa> listadoProgramas = null;
     private Cpu cpu = null;
-    private Integer quantum = 1000;
+    private Integer quantum = 500;
 
     private Despachador() {
         cpu = new Cpu(1);

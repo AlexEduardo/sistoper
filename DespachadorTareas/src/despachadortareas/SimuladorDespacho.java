@@ -7,28 +7,18 @@ package despachadortareas;
 import com.sistoper.business.BusinessFactory;
 import com.sistoper.business.IDespachador;
 import com.sistoper.domain.Proceso;
-import com.sistoper.utils.EstadoProceso;
-
 /**
  *
  * @author simon
  */
 public class SimuladorDespacho extends Thread {
 
-    private boolean prendido;
-    private static SimuladorDespacho instance = null;
+    private boolean prendido;    
 
-    private SimuladorDespacho(boolean continuar) {
+    public SimuladorDespacho(boolean continuar) {
         super();
         this.prendido = continuar;
-    }
-
-    public static SimuladorDespacho getSimuladorDespacho(boolean continuar) {
-        if (instance == null) {
-            instance = new SimuladorDespacho(continuar);
-        }
-        return instance;
-    }
+    }    
 
     public void setPrendido(boolean prendido) {
         this.prendido = prendido;
@@ -41,14 +31,12 @@ public class SimuladorDespacho extends Thread {
         if (procesoDespachado != null) {
             despachador.asignarProcesoProcesador(procesoDespachado);
         }
-        Proceso procesoEjecucion = null;
-        int i = 0;
+        Proceso procesoEjecucion = null;        
         while (prendido) {
             if (procesoDespachado != null) {
                 try {
                     sleep(despachador.getQuantum().longValue());
-                    System.out.println("Corrida: " + i + " Proceso: "+ procesoDespachado.getId());
-                    i++;
+                    System.out.println("Proceso: "+ procesoDespachado.getId() + " Tiempo: " + procesoDespachado.getTiempoEjecutado());                    
                 } catch (Exception e) {
                 }
                 procesoEjecucion = despachador.obtenerProcesoEjecucion();
@@ -77,5 +65,11 @@ public class SimuladorDespacho extends Thread {
                 }
             }
         }
+        procesoEjecucion = despachador.obtenerProcesoEjecucion();
+        if (procesoEjecucion != null) {
+            despachador.activarProceso(procesoEjecucion);
+            despachador.liberarProcesador();
+        }
+        interrupt();
     }
 }
