@@ -116,6 +116,8 @@ public class DespachadorTareasView extends FrameView {
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         miMiPC = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
@@ -136,7 +138,7 @@ public class DespachadorTareasView extends FrameView {
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 539, Short.MAX_VALUE)
+            .addGap(0, 547, Short.MAX_VALUE)
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -154,6 +156,24 @@ public class DespachadorTareasView extends FrameView {
 
         jMenu1.setText(resourceMap.getString("jMenu1.text")); // NOI18N
         jMenu1.setName("jMenu1"); // NOI18N
+
+        jMenuItem2.setText(resourceMap.getString("jMenuItem2.text")); // NOI18N
+        jMenuItem2.setName("jMenuItem2"); // NOI18N
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText(resourceMap.getString("jMenuItem3.text")); // NOI18N
+        jMenuItem3.setName("jMenuItem3"); // NOI18N
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         miMiPC.setText(resourceMap.getString("miMiPC.text")); // NOI18N
         miMiPC.setName("miMiPC"); // NOI18N
@@ -203,7 +223,7 @@ public class DespachadorTareasView extends FrameView {
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 679, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 705, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -250,9 +270,23 @@ private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     administrador.editarProceso(pr); 
 }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+// TODO add your handling code here:
+    SimuladorDespacho simulador = SimuladorDespacho.getSimuladorDespacho(true);
+    simulador.run();
+}//GEN-LAST:event_jMenuItem2ActionPerformed
+
+private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+// TODO add your handling code here:
+    SimuladorDespacho simulador = SimuladorDespacho.getSimuladorDespacho(true);
+    simulador.setPrendido(false);
+}//GEN-LAST:event_jMenuItem3ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem miMiPC;

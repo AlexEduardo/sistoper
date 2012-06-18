@@ -15,22 +15,39 @@ import com.sistoper.utils.EstadoProceso;
  */
 public class SimuladorDespacho extends Thread {
 
-    private boolean continuar;
+    private boolean prendido;
+    
+    private static SimuladorDespacho instance = null;
 
-    public SimuladorDespacho(boolean continuar) {
+    private SimuladorDespacho(boolean continuar) {
         super();
-        this.continuar = continuar;
+        this.prendido = continuar;
+    }
+    
+    public static SimuladorDespacho getSimuladorDespacho (boolean continuar) {
+        if (instance == null) {
+            instance = new SimuladorDespacho(continuar);
+        }
+        return instance;
+    }
+    
+    public void setPrendido (boolean prendido) {
+        this.prendido = prendido;
     }
 
+    @Override
     public void run() {
         IDespachador despachador = BusinessFactory.getDespachador();
         Proceso procesoDespachado = despachador.obtenerProximoProcesoAEjecutar();
         despachador.asignarProcesoProcesador(procesoDespachado);
         despachador.obtenerColaProcesos().remove(procesoDespachado);
         Proceso procesoEjecucion = null;
-        while (continuar) {
+        int i = 0;
+        while (prendido) {
             try {
                 sleep(despachador.getQuantum().longValue());
+                System.out.println("Corrida: "+i);
+                i++;
             } catch (Exception e) {
             }
             procesoEjecucion = despachador.obtenerProcesoEjecucion();

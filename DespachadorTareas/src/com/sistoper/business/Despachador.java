@@ -8,6 +8,7 @@ import com.sistoper.domain.Cpu;
 import com.sistoper.domain.Proceso;
 import com.sistoper.domain.Programa;
 import com.sistoper.utils.EstadoProceso;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +27,10 @@ public class Despachador implements IDespachador {
     
     private Integer quantum = 1000;
     
-    private Despachador () {        
+    private Despachador () {
+        cpu = new Cpu(1);
+        colaProcesos = new ArrayList<Proceso>();
+        listadoProgramas = new ArrayList<Programa>();
     }
     
     public static Despachador getDespachador() {
