@@ -38,6 +38,7 @@ public class Proceso {
         this.prioridad = prioridad;
         this.estado = estado;
         this.tiempoEjecucion = tiempoEjecucion;
+        this.tiempoEjecutado = new Integer(0);
     }
     
     public Cpu getCpu() {
