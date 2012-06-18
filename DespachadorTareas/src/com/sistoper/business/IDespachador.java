@@ -15,7 +15,6 @@ import java.util.List;
  */
 public interface IDespachador {
     
-<<<<<<< .mine
     public Proceso crearProceso(Integer id, String nombre, String prioridad, EstadoProceso estado, Integer tiempoEjecucion);
     
     public void encolarProceso (Proceso proceso);
