@@ -46,6 +46,7 @@ public class Despachador implements IDespachador {
     
     public Proceso crearProceso(Integer id, String nombre, int prioridad, EstadoProceso estado, Integer tiempoEjecucion) {
         Proceso proceso = new Proceso(id,nombre,prioridad,estado,tiempoEjecucion);
+        this.encolarProceso(proceso);
         return proceso;
     }
     
