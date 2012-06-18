@@ -20,7 +20,7 @@ public class Proceso {
     
     private String nombre;
     
-    private String prioridad;
+    private int prioridad;
     
     private EstadoProceso estado;
     
@@ -32,7 +32,7 @@ public class Proceso {
         this.programa = programa;
     }
 
-    public Proceso(Integer id, String nombre, String prioridad, EstadoProceso estado, Integer tiempoEjecucion) {
+    public Proceso(Integer id, String nombre, int prioridad, EstadoProceso estado, Integer tiempoEjecucion) {
         this.id = id;
         this.nombre = nombre;
         this.prioridad = prioridad;
@@ -72,11 +72,11 @@ public class Proceso {
         this.nombre = nombre;
     }
 
-    public String getPrioridad() {
+    public int getPrioridad() {
         return prioridad;
     }
 
-    public synchronized void setPrioridad(String prioridad) {
+    public synchronized void setPrioridad(int prioridad) {
         this.prioridad = prioridad;
     }
 

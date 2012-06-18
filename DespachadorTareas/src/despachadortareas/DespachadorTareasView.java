@@ -257,7 +257,7 @@ private void miMiPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     p.setNombre("MiPC");
     administrador.agregarAplicacion(p);
     
-    Proceso pr = desp.crearProceso(1, "Explorer.exe", "2", EstadoProceso.LISTO, 15);
+    Proceso pr = desp.crearProceso(1, "Explorer.exe", 2, EstadoProceso.LISTO, 15);
     administrador.agregarProceso(pr);
     
 }//GEN-LAST:event_miMiPCActionPerformed
@@ -266,14 +266,14 @@ private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 // TODO add your handling code here:
     //Prueba para probar cambiar el valor del estado del proceso en la tabla
     IDespachador desp = BusinessFactory.getDespachador();
-    Proceso pr = desp.crearProceso(1, "Explorer.exe", "2", EstadoProceso.EJECUCION, 15);
+    Proceso pr = desp.crearProceso(1, "Explorer.exe", 2, EstadoProceso.EJECUCION, 15);
     administrador.editarProceso(pr); 
 }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 // TODO add your handling code here:
     SimuladorDespacho simulador = SimuladorDespacho.getSimuladorDespacho(true);
-    simulador.run();
+    simulador.start();
 }//GEN-LAST:event_jMenuItem2ActionPerformed
 
 private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed

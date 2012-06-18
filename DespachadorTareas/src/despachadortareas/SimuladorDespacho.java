@@ -16,22 +16,21 @@ import com.sistoper.utils.EstadoProceso;
 public class SimuladorDespacho extends Thread {
 
     private boolean prendido;
-    
     private static SimuladorDespacho instance = null;
 
     private SimuladorDespacho(boolean continuar) {
         super();
         this.prendido = continuar;
     }
-    
-    public static SimuladorDespacho getSimuladorDespacho (boolean continuar) {
+
+    public static SimuladorDespacho getSimuladorDespacho(boolean continuar) {
         if (instance == null) {
             instance = new SimuladorDespacho(continuar);
         }
         return instance;
     }
-    
-    public void setPrendido (boolean prendido) {
+
+    public void setPrendido(boolean prendido) {
         this.prendido = prendido;
     }
 
@@ -39,34 +38,46 @@ public class SimuladorDespacho extends Thread {
     public void run() {
         IDespachador despachador = BusinessFactory.getDespachador();
         Proceso procesoDespachado = despachador.obtenerProximoProcesoAEjecutar();
-        despachador.asignarProcesoProcesador(procesoDespachado);
-        despachador.obtenerColaProcesos().remove(procesoDespachado);
+        if (procesoDespachado != null) {
+            despachador.asignarProcesoProcesador(procesoDespachado);
+            despachador.obtenerColaProcesos().remove(procesoDespachado);
+        }
         Proceso procesoEjecucion = null;
         int i = 0;
         while (prendido) {
-            try {
-                sleep(despachador.getQuantum().longValue());
-                System.out.println("Corrida: "+i);
-                i++;
-            } catch (Exception e) {
-            }
-            procesoEjecucion = despachador.obtenerProcesoEjecucion();
-            if (procesoDespachado.getId().equals(procesoEjecucion.getId())) {
-                Integer tiempo = procesoEjecucion.getTiempoEjecutado();
-                tiempo = new Integer(tiempo.intValue() + despachador.getQuantum());
-                procesoEjecucion.setTiempoEjecutado(tiempo);
-                if (tiempo.intValue() >= procesoEjecucion.getTiempoEjecucion().intValue()) {
-                    procesoEjecucion.setEstado(EstadoProceso.FINALIZADO);
-                    despachador.liberarProcesador();
-                } else {
-                    despachador.liberarProcesador();
-                    despachador.encolarProceso(procesoEjecucion);
+            if (procesoDespachado != null) {
+                try {
+                    sleep(despachador.getQuantum().longValue());
+                    System.out.println("Corrida: " + i);
+                    i++;
+                } catch (Exception e) {
                 }
-                procesoDespachado = despachador.obtenerProximoProcesoAEjecutar();
-                despachador.asignarProcesoProcesador(procesoDespachado);
-                despachador.obtenerColaProcesos().remove(procesoDespachado);
+                procesoEjecucion = despachador.obtenerProcesoEjecucion();
+                if (procesoDespachado.getId().equals(procesoEjecucion.getId())) {
+                    Integer tiempo = procesoEjecucion.getTiempoEjecutado();
+                    tiempo = new Integer(tiempo.intValue() + despachador.getQuantum());
+                    procesoEjecucion.setTiempoEjecutado(tiempo);
+                    if (tiempo.intValue() >= procesoEjecucion.getTiempoEjecucion().intValue()) {
+                        procesoEjecucion.setEstado(EstadoProceso.FINALIZADO);
+                        despachador.liberarProcesador();
+                    } else {
+                        despachador.liberarProcesador();
+                        despachador.encolarProceso(procesoEjecucion);
+                    }
+                    procesoDespachado = despachador.obtenerProximoProcesoAEjecutar();
+                    if (procesoDespachado != null) {
+                        despachador.asignarProcesoProcesador(procesoDespachado);
+                        despachador.obtenerColaProcesos().remove(procesoDespachado);
+                    }
+                } else {
+                    procesoDespachado = procesoEjecucion;
+                }
             } else {
-                procesoDespachado = procesoEjecucion;
+                procesoDespachado = despachador.obtenerProximoProcesoAEjecutar();
+                if (procesoDespachado != null) {
+                    despachador.asignarProcesoProcesador(procesoDespachado);
+                    despachador.obtenerColaProcesos().remove(procesoDespachado);
+                }
             }
         }
     }
