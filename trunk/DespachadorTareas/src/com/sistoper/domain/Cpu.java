@@ -14,6 +14,10 @@ public class Cpu {
     
     private Integer id;
     
+    public Cpu (Integer id) {
+        this.id = id;
+    }
+    
     public Integer getId() {
         return id;
     }
