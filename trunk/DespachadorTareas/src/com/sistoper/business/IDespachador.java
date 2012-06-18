@@ -15,13 +15,17 @@ import java.util.List;
  */
 public interface IDespachador {
     
-    public Proceso crearProceso(Integer id, String nombre, int prioridad, EstadoProceso estado, Integer tiempoEjecucion);
+    public Proceso crearProceso(String nombre, int prioridad, EstadoProceso estado, Integer tiempoEjecucion);
     
     public void encolarProceso (Proceso proceso);
     
     public void asignarProcesoProcesador (Proceso proceso);
     
     public void liberarProcesador();
+    
+    public void activarProceso (Proceso proceso);
+    
+    public void bloquearProceso (Proceso proceso);
     
     public Proceso obtenerProximoProcesoAEjecutar();
     
