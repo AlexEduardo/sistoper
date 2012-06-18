@@ -6,8 +6,10 @@ package despachadortareas;
 
 import com.sistoper.business.BusinessFactory;
 import com.sistoper.business.IDespachador;
+import com.sistoper.domain.Proceso;
 import com.sistoper.domain.Programa;
 import com.sistoper.presentation.frmAdministradorProcesos;
+import com.sistoper.utils.EstadoProceso;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -117,6 +119,7 @@ public class DespachadorTareasView extends FrameView {
         miMiPC = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
@@ -169,6 +172,15 @@ public class DespachadorTareasView extends FrameView {
         aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
         aboutMenuItem.setName("aboutMenuItem"); // NOI18N
         helpMenu.add(aboutMenuItem);
+
+        jMenuItem1.setText(resourceMap.getString("jMenuItem1.text")); // NOI18N
+        jMenuItem1.setName("jMenuItem1"); // NOI18N
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        helpMenu.add(jMenuItem1);
 
         menuBar.add(helpMenu);
 
@@ -223,13 +235,24 @@ private void miMiPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     Programa p = new Programa();
     p.setId(1);
     p.setNombre("MiPC");
-    
     administrador.agregarAplicacion(p);
+    
+    Proceso pr = desp.crearProceso(1, "Explorer.exe", "2", EstadoProceso.LISTO, 15);
+    administrador.agregarProceso(pr);
     
 }//GEN-LAST:event_miMiPCActionPerformed
 
+private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+// TODO add your handling code here:
+    //Prueba para probar cambiar el valor del estado del proceso en la tabla
+    IDespachador desp = BusinessFactory.getDespachador();
+    Proceso pr = desp.crearProceso(1, "Explorer.exe", "2", EstadoProceso.EJECUCION, 15);
+    administrador.editarProceso(pr); 
+}//GEN-LAST:event_jMenuItem1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem miMiPC;
