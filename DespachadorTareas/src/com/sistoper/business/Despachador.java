@@ -24,6 +24,8 @@ public class Despachador implements IDespachador {
     
     private List<Proceso> colaProcesos = null;
     
+    private List<Proceso> colaProcesosBloqueados = null;
+    
     private List<Programa> listadoProgramas = null;
     
     private Cpu cpu = null;
@@ -33,7 +35,8 @@ public class Despachador implements IDespachador {
     private Despachador () {
         cpu = new Cpu(1);
         colaProcesos = new ArrayList<Proceso>();
-        listadoProgramas = new ArrayList<Programa>();
+        colaProcesosBloqueados = new ArrayList<Proceso>();
+        listadoProgramas = new ArrayList<Programa>();        
     }
     
     public static Despachador getDespachador() {
@@ -44,8 +47,12 @@ public class Despachador implements IDespachador {
     }
     
     
-    public Proceso crearProceso(Integer id, String nombre, int prioridad, EstadoProceso estado, Integer tiempoEjecucion) {
-        Proceso proceso = new Proceso(id,nombre,prioridad,estado,tiempoEjecucion);
+    public Proceso crearProceso(String nombre, int prioridad, EstadoProceso estado, Integer tiempoEjecucion) {
+        Integer cantidadProcesos = colaProcesos.size() + colaProcesosBloqueados.size() + 1;
+        if (this.obtenerProcesoEjecucion() != null) {
+            cantidadProcesos++;
+        }
+        Proceso proceso = new Proceso(cantidadProcesos,nombre,prioridad,estado,tiempoEjecucion);
         this.encolarProceso(proceso);
         return proceso;
     }
@@ -56,12 +63,27 @@ public class Despachador implements IDespachador {
     
     public synchronized void asignarProcesoProcesador (Proceso proceso) {        
         this.cpu.setProceso(proceso);
+        proceso.setEstado(EstadoProceso.EJECUCION);        
         proceso.setCpu(this.cpu);
     }
     
     public void liberarProcesador() {
         this.cpu.getProceso().setCpu(null);
         this.cpu.setProceso(null);
+    }
+    
+    public void activarProceso (Proceso proceso){
+        if (this.colaProcesosBloqueados.contains(proceso)) {
+            this.colaProcesosBloqueados.remove(proceso);
+            this.encolarProceso(proceso);
+        }
+    }
+    
+    public void bloquearProceso (Proceso proceso){
+        if (this.colaProcesos.contains(proceso)) {
+            this.colaProcesos.remove(proceso);
+            this.colaProcesosBloqueados.add(proceso);
+        }
     }
     
     public synchronized Proceso obtenerProximoProcesoAEjecutar() {
@@ -88,10 +110,14 @@ public class Despachador implements IDespachador {
             public int compare(Object arg0, Object arg1) {
                 Proceso p1 = (Proceso)arg0;
                 Proceso p2 = (Proceso)arg1;
-                int faltaEjecutar1 = p1.getTiempoEjecucion().intValue() - p1.getTiempoEjecutado().intValue();
-                int faltaEjecutar2 = p2.getTiempoEjecucion().intValue() - p2.getTiempoEjecutado().intValue();                        
-                int diferenciaPrioridades = p1.getPrioridad() - p2.getPrioridad();                
-                return (faltaEjecutar1/(2*diferenciaPrioridades)) - faltaEjecutar2;
+                int diferenciaPrioridades = p1.getPrioridad() - p2.getPrioridad();
+                if (diferenciaPrioridades == 0) {
+                    return p2.getTiempoEjecutado() - p1.getTiempoEjecutado();
+                } else {
+                    int faltaEjecutar1 = p1.getTiempoEjecucion().intValue() - p1.getTiempoEjecutado().intValue();
+                    int faltaEjecutar2 = p2.getTiempoEjecucion().intValue() - p2.getTiempoEjecutado().intValue();
+                    return (faltaEjecutar1/(2*diferenciaPrioridades)) - faltaEjecutar2;
+                }
             }            
         });
         return listado;

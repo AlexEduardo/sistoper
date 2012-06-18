@@ -48,7 +48,7 @@ public class SimuladorDespacho extends Thread {
             if (procesoDespachado != null) {
                 try {
                     sleep(despachador.getQuantum().longValue());
-                    System.out.println("Corrida: " + i);
+                    System.out.println("Corrida: " + i + " Proceso: "+ procesoDespachado.getId());
                     i++;
                 } catch (Exception e) {
                 }
@@ -62,6 +62,7 @@ public class SimuladorDespacho extends Thread {
                         despachador.liberarProcesador();
                     } else {
                         despachador.liberarProcesador();
+                        procesoEjecucion.setEstado(EstadoProceso.LISTO);
                         despachador.encolarProceso(procesoEjecucion);
                     }
                     procesoDespachado = despachador.obtenerProximoProcesoAEjecutar();
