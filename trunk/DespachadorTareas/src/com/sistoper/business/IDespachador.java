@@ -15,11 +15,14 @@ import java.util.List;
  */
 public interface IDespachador {
     
+<<<<<<< .mine
     public Proceso crearProceso(Integer id, String nombre, String prioridad, EstadoProceso estado, Integer tiempoEjecucion);
     
     public void encolarProceso (Proceso proceso);
     
-    public void asignarProcesoProcesador ();
+    public void asignarProcesoProcesador (Proceso proceso);
+    
+    public void liberarProcesador();
     
     public Proceso obtenerProximoProcesoAEjecutar();
     
@@ -31,4 +34,5 @@ public interface IDespachador {
     
     public void setQuantum(Integer quantum);
     
+    public Integer getQuantum();
 }

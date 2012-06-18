@@ -46,10 +46,14 @@ public class Despachador implements IDespachador {
         this.colaProcesos.add(proceso);
     }
     
-    public void asignarProcesoProcesador () {
-        Proceso proceso = this.obtenerProximoProcesoAEjecutar();
+    public void asignarProcesoProcesador (Proceso proceso) {        
         this.cpu.setProceso(proceso);
         proceso.setCpu(this.cpu);
+    }
+    
+    public void liberarProcesador() {
+        this.cpu.getProceso().setCpu(null);
+        this.cpu.setProceso(null);        
     }
     
     public Proceso obtenerProximoProcesoAEjecutar() {
@@ -70,5 +74,9 @@ public class Despachador implements IDespachador {
     
     public void setQuantum(Integer quantum) {
         this.quantum = quantum;
+    }
+
+    public Integer getQuantum() {
+        return quantum;
     }
 }
