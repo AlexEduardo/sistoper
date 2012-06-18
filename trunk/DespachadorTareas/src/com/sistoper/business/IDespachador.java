@@ -27,6 +27,8 @@ public interface IDespachador {
     
     public void bloquearProceso (Proceso proceso);
     
+    public void finalizarProceso (Proceso proceso);
+    
     public Proceso obtenerProximoProcesoAEjecutar();
     
     public Proceso obtenerProcesoEjecucion();
