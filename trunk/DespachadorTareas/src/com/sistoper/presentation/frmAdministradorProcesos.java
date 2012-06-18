@@ -45,7 +45,6 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame {
         tmProcesos.addColumn("Nombre");
         tmProcesos.addColumn("Estado");
         tmProcesos.addColumn("Prioridad");
-        tmProcesos.addColumn("% Ejecutado");
         //Monitoreo
         tmMonitoreo.addColumn("Id");
         tmMonitoreo.addColumn("Nombre");
@@ -60,20 +59,32 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame {
         tmAplicaciones.addRow(aAgregar);
     }
     
-    public void agregarProceso(Proceso P){
-        String[] aAgregar = new String[5];
-        
-        
+    public void agregarProceso(Proceso p){
+        String[] aAgregar = new String[4];
+        aAgregar[0] = String.valueOf(p.getId());
+        aAgregar[1] = p.getNombre();
+        aAgregar[2] = p.getEstado().toString();
+        aAgregar[3] = String.valueOf(p.getPrioridad());
         tmProcesos.addRow(aAgregar);
     }
     
     public void agregarMonitoreo(String id, String nom, String ejec){
         String[] aAgregar = new String[3];
-        
-        
+        aAgregar[0] = id;
+        aAgregar[1] = nom;
+        aAgregar[2] = ejec;
         tmProcesos.addRow(aAgregar);
     }
     
+    public void editarProceso(Proceso p){
+        int nroFilas = tmProcesos.getRowCount() - 1;
+        for (int i = 0; i<=nroFilas; i++){
+            int auxValor = Integer.parseInt(tmProcesos.getValueAt(i, 0).toString());
+            if (auxValor == p.getId()){
+                tmProcesos.setValueAt(p.getEstado().toString(), i, 2);
+            }
+        }
+    }
     
     /** This method is called from within the constructor to
      * initialize the form.
