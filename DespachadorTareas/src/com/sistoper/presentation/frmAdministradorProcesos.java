@@ -10,6 +10,8 @@
  */
 package com.sistoper.presentation;
 
+import com.sistoper.domain.Proceso;
+import com.sistoper.domain.Programa;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -50,6 +52,29 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame {
         tmMonitoreo.addColumn("% Ejecutado");
     }
 
+    
+    public void agregarAplicacion(Programa p){
+        String[] aAgregar = new String[2];
+        aAgregar[0] = p.getNombre();
+        aAgregar[1] = String.valueOf(p.getProcesos().size());
+        tmAplicaciones.addRow(aAgregar);
+    }
+    
+    public void agregarProceso(Proceso P){
+        String[] aAgregar = new String[5];
+        
+        
+        tmProcesos.addRow(aAgregar);
+    }
+    
+    public void agregarMonitoreo(String id, String nom, String ejec){
+        String[] aAgregar = new String[3];
+        
+        
+        tmProcesos.addRow(aAgregar);
+    }
+    
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
