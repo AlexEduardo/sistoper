@@ -66,7 +66,9 @@ public class Despachador implements IDespachador {
     }
 
     public void liberarProcesador() {
-        this.cpu.getProceso().setCpu(null);
+        if (this.cpu.getProceso() != null) {
+            this.cpu.getProceso().setCpu(null);
+        }        
         this.cpu.setProceso(null);
     }
 
@@ -74,24 +76,23 @@ public class Despachador implements IDespachador {
         if (this.colaProcesosBloqueados.contains(proceso)) {
             this.colaProcesosBloqueados.remove(proceso);
             this.encolarProceso(proceso);
-        } else {
+        }
+        if (this.cpu.getProceso().equals(proceso)) {
+            this.liberarProcesador();
             this.encolarProceso(proceso);
         }
-        proceso.setCpu(null);
         proceso.setEstado(EstadoProceso.LISTO);
     }
 
     public void bloquearProceso(Proceso proceso) {
         if (this.colaProcesos.contains(proceso)) {
             this.colaProcesos.remove(proceso);
-            this.colaProcesosBloqueados.add(proceso);
-            proceso.setCpu(null);
+            this.colaProcesosBloqueados.add(proceso);            
             proceso.setEstado(EstadoProceso.BLOQUEADO);
         }
         if (this.cpu.getProceso().equals(proceso)) {
             this.liberarProcesador();
-            this.colaProcesosBloqueados.add(proceso);
-            proceso.setCpu(null);
+            this.colaProcesosBloqueados.add(proceso);            
             proceso.setEstado(EstadoProceso.BLOQUEADO);
         }
     }
@@ -105,6 +106,11 @@ public class Despachador implements IDespachador {
         if (this.colaProcesosBloqueados.contains(proceso)) {
             this.colaProcesosBloqueados.remove(proceso);
             this.colaProcesosFinalizados.add(proceso);
+            proceso.setEstado(EstadoProceso.FINALIZADO);
+        }
+        if (this.cpu.getProceso().equals(proceso)) {
+            this.liberarProcesador();
+            this.colaProcesosFinalizados.add(proceso);            
             proceso.setEstado(EstadoProceso.FINALIZADO);
         }
     }
