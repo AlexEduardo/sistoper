@@ -4,6 +4,9 @@
 
 package despachadortareas;
 
+import com.sistoper.business.BusinessFactory;
+import com.sistoper.business.IDespachador;
+import com.sistoper.domain.Programa;
 import com.sistoper.presentation.frmAdministradorProcesos;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
@@ -110,6 +113,8 @@ public class DespachadorTareasView extends FrameView {
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        miMiPC = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
         statusPanel = new javax.swing.JPanel();
@@ -143,6 +148,20 @@ public class DespachadorTareasView extends FrameView {
         fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
+
+        jMenu1.setText(resourceMap.getString("jMenu1.text")); // NOI18N
+        jMenu1.setName("jMenu1"); // NOI18N
+
+        miMiPC.setText(resourceMap.getString("miMiPC.text")); // NOI18N
+        miMiPC.setName("miMiPC"); // NOI18N
+        miMiPC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miMiPCActionPerformed(evt);
+            }
+        });
+        jMenu1.add(miMiPC);
+
+        menuBar.add(jMenu1);
 
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
         helpMenu.setName("helpMenu"); // NOI18N
@@ -195,9 +214,25 @@ public class DespachadorTareasView extends FrameView {
         setStatusBar(statusPanel);
     }// </editor-fold>//GEN-END:initComponents
 
+private void miMiPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMiPCActionPerformed
+// TODO add your handling code here:
+    IDespachador desp = BusinessFactory.getDespachador();
+    
+    
+    //Prueba!
+    Programa p = new Programa();
+    p.setId(1);
+    p.setNombre("MiPC");
+    
+    administrador.agregarAplicacion(p);
+    
+}//GEN-LAST:event_miMiPCActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem miMiPC;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
