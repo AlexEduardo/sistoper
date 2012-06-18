@@ -40,7 +40,6 @@ public class SimuladorDespacho extends Thread {
         Proceso procesoDespachado = despachador.obtenerProximoProcesoAEjecutar();
         if (procesoDespachado != null) {
             despachador.asignarProcesoProcesador(procesoDespachado);
-            despachador.obtenerColaProcesos().remove(procesoDespachado);
         }
         Proceso procesoEjecucion = null;
         int i = 0;
@@ -58,17 +57,15 @@ public class SimuladorDespacho extends Thread {
                     tiempo = new Integer(tiempo.intValue() + despachador.getQuantum());
                     procesoEjecucion.setTiempoEjecutado(tiempo);
                     if (tiempo.intValue() >= procesoEjecucion.getTiempoEjecucion().intValue()) {
-                        procesoEjecucion.setEstado(EstadoProceso.FINALIZADO);
+                        despachador.finalizarProceso(procesoEjecucion);
                         despachador.liberarProcesador();
-                    } else {
+                    } else {                        
+                        despachador.activarProceso(procesoEjecucion);
                         despachador.liberarProcesador();
-                        procesoEjecucion.setEstado(EstadoProceso.LISTO);
-                        despachador.encolarProceso(procesoEjecucion);
                     }
                     procesoDespachado = despachador.obtenerProximoProcesoAEjecutar();
                     if (procesoDespachado != null) {
                         despachador.asignarProcesoProcesador(procesoDespachado);
-                        despachador.obtenerColaProcesos().remove(procesoDespachado);
                     }
                 } else {
                     procesoDespachado = procesoEjecucion;
@@ -77,7 +74,6 @@ public class SimuladorDespacho extends Thread {
                 procesoDespachado = despachador.obtenerProximoProcesoAEjecutar();
                 if (procesoDespachado != null) {
                     despachador.asignarProcesoProcesador(procesoDespachado);
-                    despachador.obtenerColaProcesos().remove(procesoDespachado);
                 }
             }
         }
