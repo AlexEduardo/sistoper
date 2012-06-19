@@ -274,7 +274,7 @@ private void miMiPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     p.setId(1);
     p.setNombre("MiPC");
     administrador.agregarAplicacion(p);
-    desp.crearProceso("Explorer.exe", 2, EstadoProceso.LISTO, 10000);
+    desp.crearProceso("Explorer.exe", 5, EstadoProceso.LISTO, 20000);
 }//GEN-LAST:event_miMiPCActionPerformed
 
 private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
