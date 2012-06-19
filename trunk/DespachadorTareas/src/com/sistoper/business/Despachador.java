@@ -154,7 +154,7 @@ public class Despachador extends Observable implements IDespachador {
                 Proceso p2 = (Proceso) arg1;
                 int diferenciaPrioridades = p2.getPrioridad() - p1.getPrioridad();
                 if (diferenciaPrioridades == 0) {
-                    return p2.getTiempoEjecutado() - p1.getTiempoEjecutado();
+                    return p1.getTiempoEjecutado() - p2.getTiempoEjecutado();
                 } else {
                     int faltaEjecutar1 = p1.getTiempoEjecucion().intValue() - p1.getTiempoEjecutado().intValue();
                     int faltaEjecutar2 = p2.getTiempoEjecucion().intValue() - p2.getTiempoEjecutado().intValue();
