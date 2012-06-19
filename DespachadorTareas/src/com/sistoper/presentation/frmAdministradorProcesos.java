@@ -292,7 +292,7 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
 
     public void update(Observable o, Object o1) {
         List<Proceso> colaProcesos = ((Despachador) o).getColaProcesos();
-        List<Proceso> colaProcesosBloqueados = ((Despachador) o).getColaProcesosBloqueados();
+        List<Proceso> colaProcesosBloqueados = ((Despachador) o).getColaProcesosSuspendidos();
         int numeroProcesos = tmProcesos.getRowCount();
         for (int i = 0; i < numeroProcesos; i++) {
             tmProcesos.removeRow(0);

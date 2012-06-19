@@ -18,7 +18,7 @@ public class Despachador extends Observable implements IDespachador {
 
     private static Despachador instance = null;
     private List<Proceso> colaProcesos = null;
-    private List<Proceso> colaProcesosBloqueados = null;
+    private List<Proceso> colaProcesosSuspendidos = null;
     private List<Proceso> colaProcesosFinalizados = null;
     private List<Programa> listadoProgramas = null;
     private Cpu cpu = null;
@@ -27,7 +27,7 @@ public class Despachador extends Observable implements IDespachador {
     private Despachador() {
         cpu = new Cpu(1);
         colaProcesos = new ArrayList<Proceso>();
-        colaProcesosBloqueados = new ArrayList<Proceso>();
+        colaProcesosSuspendidos = new ArrayList<Proceso>();
         colaProcesosFinalizados = new ArrayList<Proceso>();
         listadoProgramas = new ArrayList<Programa>();
     }
@@ -40,7 +40,7 @@ public class Despachador extends Observable implements IDespachador {
     }
 
     public Proceso crearProceso(String nombre, int prioridad, EstadoProceso estado, Integer tiempoEjecucion) {
-        Integer cantidadProcesos = colaProcesos.size() + colaProcesosBloqueados.size() + colaProcesosFinalizados.size() + 1;
+        Integer cantidadProcesos = colaProcesos.size() + colaProcesosSuspendidos.size() + colaProcesosFinalizados.size() + 1;
         if (this.obtenerProcesoEjecucion() != null) {
             cantidadProcesos++;
         }
@@ -76,8 +76,8 @@ public class Despachador extends Observable implements IDespachador {
     }
 
     public void activarProceso(Proceso proceso) {
-        if (this.colaProcesosBloqueados.contains(proceso)) {
-            this.colaProcesosBloqueados.remove(proceso);
+        if (this.colaProcesosSuspendidos.contains(proceso)) {
+            this.colaProcesosSuspendidos.remove(proceso);
             this.encolarProceso(proceso);
         }
         if (this.cpu.getProceso().equals(proceso)) {
@@ -89,16 +89,16 @@ public class Despachador extends Observable implements IDespachador {
         this.notifyObservers();
     }
 
-    public void bloquearProceso(Proceso proceso) {
+    public void suspenderProceso(Proceso proceso) {
         if (this.colaProcesos.contains(proceso)) {
             this.colaProcesos.remove(proceso);
-            this.colaProcesosBloqueados.add(proceso);
-            proceso.setEstado(EstadoProceso.BLOQUEADO);
+            this.colaProcesosSuspendidos.add(proceso);
+            proceso.setEstado(EstadoProceso.SUSPENDIDO);
         }
         if (this.cpu.getProceso().equals(proceso)) {
             this.liberarProcesador();
-            this.colaProcesosBloqueados.add(proceso);
-            proceso.setEstado(EstadoProceso.BLOQUEADO);
+            this.colaProcesosSuspendidos.add(proceso);
+            proceso.setEstado(EstadoProceso.SUSPENDIDO);
         }
         this.setChanged();
         this.notifyObservers();
@@ -110,8 +110,8 @@ public class Despachador extends Observable implements IDespachador {
             this.colaProcesosFinalizados.add(proceso);
             proceso.setEstado(EstadoProceso.FINALIZADO);
         }
-        if (this.colaProcesosBloqueados.contains(proceso)) {
-            this.colaProcesosBloqueados.remove(proceso);
+        if (this.colaProcesosSuspendidos.contains(proceso)) {
+            this.colaProcesosSuspendidos.remove(proceso);
             this.colaProcesosFinalizados.add(proceso);
             proceso.setEstado(EstadoProceso.FINALIZADO);
         }
@@ -154,14 +154,14 @@ public class Despachador extends Observable implements IDespachador {
                 Proceso p2 = (Proceso) arg1;
                 int diferenciaPrioridades = p2.getPrioridad() - p1.getPrioridad();
                 if (diferenciaPrioridades == 0) {
-                    return p1.getTiempoEjecutado() - p2.getTiempoEjecutado();
+                    return p2.getTiempoEjecutado() - p1.getTiempoEjecutado();
                 } else {
                     int faltaEjecutar1 = p1.getTiempoEjecucion().intValue() - p1.getTiempoEjecutado().intValue();
                     int faltaEjecutar2 = p2.getTiempoEjecucion().intValue() - p2.getTiempoEjecutado().intValue();
-                    if (diferenciaPrioridades > 0) {
-                        return faltaEjecutar1 - (faltaEjecutar2 / (2 * diferenciaPrioridades));
+                    if (diferenciaPrioridades < 0) {
+                        return (faltaEjecutar1 / (2 * diferenciaPrioridades)) - faltaEjecutar2;
                     } else {
-                        return faltaEjecutar2 - (faltaEjecutar1 / (2 * Math.abs(diferenciaPrioridades)));
+                        return (faltaEjecutar2 / (2 * Math.abs(diferenciaPrioridades))) - faltaEjecutar1;
                     }
                 }
             }
@@ -177,8 +177,8 @@ public class Despachador extends Observable implements IDespachador {
         return colaProcesos;
     }
 
-    public List<Proceso> getColaProcesosBloqueados() {
-        return colaProcesosBloqueados;
+    public List<Proceso> getColaProcesosSuspendidos() {
+        return colaProcesosSuspendidos;
     }
 
     public List<Proceso> getColaProcesosFinalizados() {
