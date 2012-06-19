@@ -26,7 +26,7 @@ public interface IDespachador {
     
     public void activarProceso (Proceso proceso);
     
-    public void bloquearProceso (Proceso proceso);
+    public void suspenderProceso (Proceso proceso);
     
     public void finalizarProceso (Proceso proceso);
     
@@ -36,7 +36,7 @@ public interface IDespachador {
     
     public List<Proceso> getColaProcesos ();
     
-    public List<Proceso> getColaProcesosBloqueados();
+    public List<Proceso> getColaProcesosSuspendidos();
 
     public List<Proceso> getColaProcesosFinalizados();
     
