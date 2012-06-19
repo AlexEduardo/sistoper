@@ -49,4 +49,6 @@ public interface IDespachador {
     public void addObserver(Observer obsrvr);
     
     public Programa crearPrograma(String nombre, List<Proceso> listado);
+    
+    public Proceso obtenerProceso(Integer id);
 }
