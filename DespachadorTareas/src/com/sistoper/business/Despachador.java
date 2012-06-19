@@ -80,7 +80,7 @@ public class Despachador extends Observable implements IDespachador {
             this.colaProcesosSuspendidos.remove(proceso);
             this.encolarProceso(proceso);
         }
-        if (this.cpu.getProceso().equals(proceso)) {
+        if (this.cpu.getProceso() != null && this.cpu.getProceso().equals(proceso)) {
             this.liberarProcesador();
             this.encolarProceso(proceso);
         }
@@ -95,7 +95,7 @@ public class Despachador extends Observable implements IDespachador {
             this.colaProcesosSuspendidos.add(proceso);
             proceso.setEstado(EstadoProceso.SUSPENDIDO);
         }
-        if (this.cpu.getProceso().equals(proceso)) {
+        if (this.cpu.getProceso() != null && this.cpu.getProceso().equals(proceso)) {
             this.liberarProcesador();
             this.colaProcesosSuspendidos.add(proceso);
             proceso.setEstado(EstadoProceso.SUSPENDIDO);
@@ -115,7 +115,7 @@ public class Despachador extends Observable implements IDespachador {
             this.colaProcesosFinalizados.add(proceso);
             proceso.setEstado(EstadoProceso.FINALIZADO);
         }
-        if (this.cpu.getProceso().equals(proceso)) {
+        if (this.cpu.getProceso() != null && this.cpu.getProceso().equals(proceso)) {
             this.liberarProcesador();
             this.colaProcesosFinalizados.add(proceso);
             proceso.setEstado(EstadoProceso.FINALIZADO);
@@ -206,5 +206,25 @@ public class Despachador extends Observable implements IDespachador {
         this.setChanged();
         this.notifyObservers();
         return programa;
+    }
+    
+    public Proceso obtenerProceso(Integer id){
+        Proceso aRetornar = null;
+        //Veo si es el proceso activo
+        if (this.cpu.getProceso() != null && this.cpu.getProceso().getId() == id)
+            aRetornar = this.cpu.getProceso();
+        //Busco en la colaProcesos
+        if (aRetornar == null){
+            for (Proceso p : colaProcesos){
+                if (p.getId() == id) aRetornar = p;
+            }
+        }
+        //Si no encontre busco en la de Finalizados
+        if (aRetornar == null){
+            for (Proceso p : colaProcesosSuspendidos){
+                if (p.getId() == id) aRetornar = p;
+            }    
+        } 
+        return aRetornar;
     }
 }
