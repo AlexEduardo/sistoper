@@ -38,6 +38,8 @@ public class DespachadorTareasView extends FrameView {
         initComponents();
 
         this.mostrarAdministrador();
+        IDespachador desp = BusinessFactory.getDespachador();
+        desp.addObserver(administrador);
 
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
@@ -272,10 +274,7 @@ private void miMiPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     p.setId(1);
     p.setNombre("MiPC");
     administrador.agregarAplicacion(p);
-
-    Proceso pr = desp.crearProceso("Explorer.exe", 2, EstadoProceso.LISTO, 10000);
-    administrador.agregarProceso(pr);
-
+    desp.crearProceso("Explorer.exe", 2, EstadoProceso.LISTO, 10000);
 }//GEN-LAST:event_miMiPCActionPerformed
 
 private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

@@ -8,16 +8,13 @@ import com.sistoper.domain.Cpu;
 import com.sistoper.domain.Proceso;
 import com.sistoper.domain.Programa;
 import com.sistoper.utils.EstadoProceso;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  *
  * @author D314721
  */
-public class Despachador implements IDespachador {
+public class Despachador extends Observable implements IDespachador {
 
     private static Despachador instance = null;
     private List<Proceso> colaProcesos = null;
@@ -54,6 +51,8 @@ public class Despachador implements IDespachador {
 
     public void encolarProceso(Proceso proceso) {
         this.colaProcesos.add(proceso);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public synchronized void asignarProcesoProcesador(Proceso proceso) {
@@ -63,6 +62,8 @@ public class Despachador implements IDespachador {
         }
         proceso.setEstado(EstadoProceso.EJECUCION);
         proceso.setCpu(this.cpu);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void liberarProcesador() {
@@ -70,6 +71,8 @@ public class Despachador implements IDespachador {
             this.cpu.getProceso().setCpu(null);
         }        
         this.cpu.setProceso(null);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void activarProceso(Proceso proceso) {
@@ -82,6 +85,8 @@ public class Despachador implements IDespachador {
             this.encolarProceso(proceso);
         }
         proceso.setEstado(EstadoProceso.LISTO);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void bloquearProceso(Proceso proceso) {
@@ -95,6 +100,8 @@ public class Despachador implements IDespachador {
             this.colaProcesosBloqueados.add(proceso);            
             proceso.setEstado(EstadoProceso.BLOQUEADO);
         }
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void finalizarProceso(Proceso proceso) {
@@ -113,12 +120,16 @@ public class Despachador implements IDespachador {
             this.colaProcesosFinalizados.add(proceso);            
             proceso.setEstado(EstadoProceso.FINALIZADO);
         }
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public synchronized Proceso obtenerProximoProcesoAEjecutar() {
-        if (!this.colaProcesos.isEmpty()) {
+        if (!this.colaProcesos.isEmpty()) {            
             this.colaProcesos = this.ordenarPorPrioridad(this.colaProcesos);
             this.colaProcesos = this.ordenarPorTiempo(this.colaProcesos);
+            this.setChanged();
+            this.notifyObservers();
             return this.colaProcesos.iterator().next();
         } else {
             return null;
@@ -158,15 +169,25 @@ public class Despachador implements IDespachador {
         return this.cpu.getProceso();
     }
 
-    public List<Proceso> obtenerColaProcesos() {
-        return this.colaProcesos;
+    public List<Proceso> getColaProcesos() {
+        return colaProcesos;
     }
 
-    public List<Programa> obtenerListadoProgramas() {
+    public List<Proceso> getColaProcesosBloqueados() {
+        return colaProcesosBloqueados;
+    }
+
+    public List<Proceso> getColaProcesosFinalizados() {
+        return colaProcesosFinalizados;
+    }
+    
+    public List<Programa> getListadoProgramas() {
         return this.listadoProgramas;
     }
 
     public synchronized void setQuantum(Integer quantum) {
+        this.setChanged();
+        this.notifyObservers();
         this.quantum = quantum;
     }
 
