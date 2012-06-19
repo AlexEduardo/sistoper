@@ -100,11 +100,25 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
 
     public void editarProceso(Proceso p) {
         int nroFilas = tmProcesos.getRowCount() - 1;
+        boolean encontro = false;
+        Integer posicion = 0;
         for (int i = 0; i <= nroFilas; i++) {
             int auxValor = Integer.parseInt(tmProcesos.getValueAt(i, 0).toString());
             if (auxValor == p.getId()) {
                 tmProcesos.setValueAt(p.getEstado().toString(), i, 2);
+                tmProcesos.setValueAt(String.valueOf(p.getPrioridad()), i, 3);
+                Integer porcEje = (p.getTiempoEjecutado() * 100) / p.getTiempoEjecucion();
+                tmProcesos.setValueAt(String.valueOf(porcEje), i, 4);
+                encontro = true;
+                posicion = i;
             }
+        }
+        //Si no encontro y a su vez el estado es distinto a finalizado lo agrego
+        if (!encontro && p.getEstado() != EstadoProceso.FINALIZADO){
+            this.agregarProceso(p);
+        }else if (encontro && p.getEstado() == EstadoProceso.FINALIZADO){
+            //Si esta finalizado elimino de la tabla el proceso
+            tmProcesos.removeRow(posicion);
         }
     }
     
@@ -176,14 +190,14 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
             pAplicacionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pAplicacionesLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pAplicacionesLayout.setVerticalGroup(
             pAplicacionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pAplicacionesLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -240,12 +254,12 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
             .add(pProcesosLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(pProcesosLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                     .add(pProcesosLayout.createSequentialGroup()
                         .add(btnSuspender)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(btnReanudar)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 146, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 35, Short.MAX_VALUE)
                         .add(btnFinalizar)))
                 .addContainerGap())
         );
@@ -301,13 +315,13 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel4Layout.createSequentialGroup()
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -343,8 +357,8 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(tpPrincipal, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 470, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .add(tpPrincipal, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 500, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -392,19 +406,27 @@ private void btnReanudarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     public void update(Observable o, Object o1) {
         List<Proceso> colaProcesos = ((Despachador) o).getColaProcesos();
         List<Proceso> colaProcesosBloqueados = ((Despachador) o).getColaProcesosSuspendidos();
-        int numeroProcesos = tmProcesos.getRowCount();
-        for (int i = 0; i < numeroProcesos; i++) {
-            tmProcesos.removeRow(0);
-        }        
+        List<Proceso> colaProcesosFinalizados = ((Despachador) o).getColaProcesosFinalizados();
+        //int numeroProcesos = tmProcesos.getRowCount();
+        //for (int i = 0; i < numeroProcesos; i++) {
+        //    tmProcesos.removeRow(0);
+        //}        
         Proceso procesoEjecucion = ((Despachador) o).obtenerProcesoEjecucion();
         if (procesoEjecucion != null) {
-            this.agregarProceso(procesoEjecucion);
+            //this.agregarProceso(procesoEjecucion);
+            this.editarProceso(procesoEjecucion);
         }
         for (Proceso proceso : colaProcesos) {
-            this.agregarProceso(proceso);
+            //this.agregarProceso(proceso);
+            this.editarProceso(proceso);
         }
         for (Proceso proceso : colaProcesosBloqueados) {
-            this.agregarProceso(proceso);
+            //this.agregarProceso(proceso);
+            this.editarProceso(proceso);
+        }
+        //Recorro los Finalizados para ver de eliminarlos
+        for (Proceso proceso : colaProcesosFinalizados){
+            this.editarProceso(proceso);
         }
         //this.updateUI();
         //Programas
@@ -414,7 +436,8 @@ private void btnReanudarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             tmProgramas.removeRow(0);
         }  
         for (Programa programa : listaProgramas){
-            this.agregarPrograma(programa);
+            if (this.tieneProcesosActivos(programa))
+                this.agregarPrograma(programa);
         }
         //Monitoreo
         if (procesoEjecucion != null) {
@@ -453,5 +476,13 @@ private void btnReanudarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             Proceso p = despachador.obtenerProceso(id);
             if (p != null && p.getEstado() == EstadoProceso.SUSPENDIDO) despachador.activarProceso(p);
         }
+    }
+    
+    private boolean tieneProcesosActivos(Programa p){
+        for (Proceso pro : p.getProcesos()){
+            if (pro.getEstado() != EstadoProceso.FINALIZADO)
+                return true;
+        }
+        return false;
     }
 }
