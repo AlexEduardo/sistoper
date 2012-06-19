@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class frmAdministradorProcesos extends javax.swing.JInternalFrame implements Observer {
 
-    private DefaultTableModel tmAplicaciones;
+    private DefaultTableModel tmProgramas;
     private DefaultTableModel tmProcesos;
     private DefaultTableModel tmMonitoreo;
 
@@ -34,17 +34,17 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
     public frmAdministradorProcesos() {
         initComponents();
         //Inicializo los modelos    
-        tmAplicaciones = new DefaultTableModel();
+        tmProgramas = new DefaultTableModel();
         tmProcesos = new DefaultTableModel();
         tmMonitoreo = new DefaultTableModel();
         //Asigno los modelos a las tablas
-        tblAplicaciones.setModel(tmAplicaciones);
+        tblAplicaciones.setModel(tmProgramas);
         tblProcesos.setModel(tmProcesos);
         tblMonitoreo.setModel(tmMonitoreo);
         //Creo las columnas de los modelos
         //Aplicaciones
-        tmAplicaciones.addColumn("Nombre");
-        tmAplicaciones.addColumn("#Procesos");
+        tmProgramas.addColumn("Nombre");
+        tmProgramas.addColumn("#Procesos");
         //Procesos
         tmProcesos.addColumn("Id");
         tmProcesos.addColumn("Nombre");
@@ -56,11 +56,11 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
         tmMonitoreo.addColumn("% Ejecutado");
     }
 
-    public void agregarAplicacion(Programa p) {
+    public void agregarPrograma(Programa p) {
         String[] aAgregar = new String[2];
         aAgregar[0] = p.getNombre();
         aAgregar[1] = String.valueOf(p.getProcesos().size());
-        tmAplicaciones.addRow(aAgregar);
+        tmProgramas.addRow(aAgregar);
     }
 
     public synchronized void agregarProceso(Proceso p) {
@@ -77,7 +77,7 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
         aAgregar[0] = id;
         aAgregar[1] = nom;
         aAgregar[2] = ejec;
-        tmProcesos.addRow(aAgregar);
+        tmMonitoreo.addRow(aAgregar);
     }
 
     public void editarProceso(Proceso p) {
@@ -141,19 +141,18 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
             pAplicacionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pAplicacionesLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pAplicacionesLayout.setVerticalGroup(
             pAplicacionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pAplicacionesLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(despachadortareas.DespachadorTareasApp.class).getContext().getResourceMap(frmAdministradorProcesos.class);
-        tpPrincipal.addTab(resourceMap.getString("pAplicaciones.TabConstraints.tabTitle"), pAplicaciones); // NOI18N
+        tpPrincipal.addTab("Aplicaciones", pAplicaciones);
 
         pProcesos.setName("pProcesos"); // NOI18N
 
@@ -181,14 +180,14 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
             pProcesosLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pProcesosLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pProcesosLayout.setVerticalGroup(
             pProcesosLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pProcesosLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -229,13 +228,13 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel4Layout.createSequentialGroup()
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -264,15 +263,15 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(tpPrincipal, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
-                .addContainerGap())
+                .add(tpPrincipal, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 410, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(tpPrincipal, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
-                .addContainerGap())
+                .add(tpPrincipal, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 470, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -307,6 +306,23 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
         }
         for (Proceso proceso : colaProcesosBloqueados) {
             this.agregarProceso(proceso);
+        }
+        //this.updateUI();
+        //Programas
+        List<Programa> listaProgramas = ((Despachador) o).getListadoProgramas();
+        int numeroProgramas = tmProgramas.getRowCount();
+        for (int i = 0; i < numeroProgramas; i++) {
+            tmProgramas.removeRow(0);
+        }  
+        for (Programa programa : listaProgramas){
+            this.agregarPrograma(programa);
+        }
+        //Monitoreo
+        if (procesoEjecucion != null) {
+            Integer porcEje = (procesoEjecucion.getTiempoEjecutado() * 100) / procesoEjecucion.getTiempoEjecucion();
+            String ejecutado = String.valueOf(porcEje);
+            this.agregarMonitoreo(String.valueOf(procesoEjecucion.getId()),
+                    procesoEjecucion.getNombre(), ejecutado);
         }
     }
 }

@@ -17,6 +17,8 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
@@ -127,9 +129,9 @@ public class DespachadorTareasView extends FrameView {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         miMiPC = new javax.swing.JMenuItem();
+        miRed = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
@@ -202,6 +204,15 @@ public class DespachadorTareasView extends FrameView {
         });
         jMenu1.add(miMiPC);
 
+        miRed.setText(resourceMap.getString("miRed.text")); // NOI18N
+        miRed.setName("miRed"); // NOI18N
+        miRed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRedActionPerformed(evt);
+            }
+        });
+        jMenu1.add(miRed);
+
         menuBar.add(jMenu1);
 
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
@@ -210,15 +221,6 @@ public class DespachadorTareasView extends FrameView {
         aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
         aboutMenuItem.setName("aboutMenuItem"); // NOI18N
         helpMenu.add(aboutMenuItem);
-
-        jMenuItem1.setText(resourceMap.getString("jMenuItem1.text")); // NOI18N
-        jMenuItem1.setName("jMenuItem1"); // NOI18N
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        helpMenu.add(jMenuItem1);
 
         menuBar.add(helpMenu);
 
@@ -266,24 +268,13 @@ public class DespachadorTareasView extends FrameView {
 
 private void miMiPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMiPCActionPerformed
 // TODO add your handling code here:
+    List<Proceso> listaProcesos = new ArrayList<Proceso>();
     IDespachador desp = BusinessFactory.getDespachador();
-
-
-    //Prueba!
-    Programa p = new Programa();
-    p.setId(1);
-    p.setNombre("MiPC");
-    administrador.agregarAplicacion(p);
-    desp.crearProceso("Explorer.exe", 5, EstadoProceso.LISTO, 20000);
+    Proceso p1 = desp.crearProceso("Explorer.exe", 2, EstadoProceso.LISTO, 10000);
+    listaProcesos.add(p1);
+    
+    desp.crearPrograma("MiPc", listaProcesos);    
 }//GEN-LAST:event_miMiPCActionPerformed
-
-private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-// TODO add your handling code here:
-    //Prueba para probar cambiar el valor del estado del proceso en la tabla
-    IDespachador desp = BusinessFactory.getDespachador();
-    Proceso pr = desp.crearProceso("Explorer.exe", 2, EstadoProceso.EJECUCION, 10000);
-    administrador.editarProceso(pr);
-}//GEN-LAST:event_jMenuItem1ActionPerformed
 
 private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 // TODO add your handling code here:
@@ -308,15 +299,26 @@ private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     }
     nuevaTarea.setVisible(true);
 }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+private void miRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRedActionPerformed
+// TODO add your handling code here:
+    List<Proceso> listaProcesos = new ArrayList<Proceso>();
+    IDespachador desp = BusinessFactory.getDespachador();
+    Proceso p1 = desp.crearProceso("Red.exe", 2, EstadoProceso.LISTO, 15000);
+    listaProcesos.add(p1);
+    
+    desp.crearPrograma("Red", listaProcesos); 
+}//GEN-LAST:event_miRedActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem miMiPC;
+    private javax.swing.JMenuItem miRed;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;

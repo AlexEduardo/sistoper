@@ -47,4 +47,6 @@ public interface IDespachador {
     public Integer getQuantum();
     
     public void addObserver(Observer obsrvr);
+    
+    public Programa crearPrograma(String nombre, List<Proceso> listado);
 }
