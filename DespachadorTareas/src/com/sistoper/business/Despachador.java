@@ -127,7 +127,7 @@ public class Despachador extends Observable implements IDespachador {
     public synchronized Proceso obtenerProximoProcesoAEjecutar() {
         if (!this.colaProcesos.isEmpty()) {            
             this.colaProcesos = this.ordenarPorPrioridad(this.colaProcesos);
-            this.colaProcesos = this.ordenarPorTiempo(this.colaProcesos);
+            //this.colaProcesos = this.ordenarPorTiempo(this.colaProcesos);
             this.setChanged();
             this.notifyObservers();
             return this.colaProcesos.iterator().next();

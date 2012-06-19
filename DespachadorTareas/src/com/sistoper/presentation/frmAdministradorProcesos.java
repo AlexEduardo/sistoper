@@ -308,6 +308,5 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
         for (Proceso proceso : colaProcesosBloqueados) {
             this.agregarProceso(proceso);
         }
-        this.updateUI();
     }
 }
