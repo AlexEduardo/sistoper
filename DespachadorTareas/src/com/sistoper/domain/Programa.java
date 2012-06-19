@@ -26,6 +26,12 @@ public class Programa {
     public Programa (List<Proceso> procesos) {
         this.procesos = procesos;
     }
+    
+    public Programa (Integer id, String nombre, List<Proceso> procesos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.procesos = procesos;
+    }
 
     public Integer getId() {
         return id;

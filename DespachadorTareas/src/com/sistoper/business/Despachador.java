@@ -198,4 +198,13 @@ public class Despachador extends Observable implements IDespachador {
     public Integer getQuantum() {
         return quantum;
     }
+    
+    public Programa crearPrograma(String nombre, List<Proceso> listado) {
+        Integer proximoId = listadoProgramas.size() + 1;
+        Programa programa = new Programa(proximoId, nombre, listado);
+        this.listadoProgramas.add(programa);
+        this.setChanged();
+        this.notifyObservers();
+        return programa;
+    }
 }
