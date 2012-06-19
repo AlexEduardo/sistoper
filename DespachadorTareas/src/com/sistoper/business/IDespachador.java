@@ -8,6 +8,7 @@ import com.sistoper.domain.Proceso;
 import com.sistoper.domain.Programa;
 import com.sistoper.utils.EstadoProceso;
 import java.util.List;
+import java.util.Observer;
 
 /**
  *
@@ -33,11 +34,17 @@ public interface IDespachador {
     
     public Proceso obtenerProcesoEjecucion();
     
-    public List<Proceso> obtenerColaProcesos ();
+    public List<Proceso> getColaProcesos ();
     
-    public List<Programa> obtenerListadoProgramas ();
+    public List<Proceso> getColaProcesosBloqueados();
+
+    public List<Proceso> getColaProcesosFinalizados();
+    
+    public List<Programa> getListadoProgramas ();
     
     public void setQuantum(Integer quantum);
     
     public Integer getQuantum();
+    
+    public void addObserver(Observer obsrvr);
 }
