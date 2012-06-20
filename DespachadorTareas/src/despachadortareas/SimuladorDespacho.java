@@ -40,7 +40,7 @@ public class SimuladorDespacho extends Thread {
                 } catch (Exception e) {
                 }
                 procesoEjecucion = despachador.obtenerProcesoEjecucion();
-                if (procesoDespachado.getId().equals(procesoEjecucion.getId())) {
+                if (procesoEjecucion != null && procesoDespachado.getId().equals(procesoEjecucion.getId())) {
                     Integer tiempo = procesoEjecucion.getTiempoEjecutado();
                     tiempo = new Integer(tiempo.intValue() + despachador.getQuantum());
                     procesoEjecucion.setTiempoEjecutado(tiempo);
