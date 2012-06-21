@@ -16,6 +16,7 @@ import com.sistoper.business.IDespachador;
 import com.sistoper.domain.Proceso;
 import com.sistoper.domain.Programa;
 import com.sistoper.utils.EstadoProceso;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -147,6 +148,13 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblMonitoreo = new javax.swing.JTable();
+        lblEquipo = new javax.swing.JLabel();
+        lblFinder = new javax.swing.JLabel();
+        lblSafari = new javax.swing.JLabel();
+        lblSetting = new javax.swing.JLabel();
+        lblTerminal = new javax.swing.JLabel();
+        lblCal = new javax.swing.JLabel();
+        lblItunes = new javax.swing.JLabel();
 
         pumProceso.setName("pumProceso"); // NOI18N
 
@@ -190,14 +198,14 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
             pAplicacionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pAplicacionesLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pAplicacionesLayout.setVerticalGroup(
             pAplicacionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pAplicacionesLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -254,12 +262,12 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
             .add(pProcesosLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(pProcesosLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
                     .add(pProcesosLayout.createSequentialGroup()
                         .add(btnSuspender)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(btnReanudar)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 35, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 146, Short.MAX_VALUE)
                         .add(btnFinalizar)))
                 .addContainerGap())
         );
@@ -273,7 +281,7 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
                     .add(btnSuspender)
                     .add(btnFinalizar)
                     .add(btnReanudar))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         tpPrincipal.addTab("Procesos", pProcesos);
@@ -315,13 +323,13 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel4Layout.createSequentialGroup()
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -344,21 +352,108 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
 
         tpPrincipal.addTab("Rendimiento", Historial);
 
+        lblEquipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sistoper/presentation/resources/Home_51x51.PNG"))); // NOI18N
+        lblEquipo.setText(bundle.getString("frmAdministradorProcesos.lblEquipo.text")); // NOI18N
+        lblEquipo.setName("lblEquipo"); // NOI18N
+        lblEquipo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEquipoMouseClicked(evt);
+            }
+        });
+
+        lblFinder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sistoper/presentation/resources/Finder_51x51.png"))); // NOI18N
+        lblFinder.setText(bundle.getString("frmAdministradorProcesos.lblFinder.text")); // NOI18N
+        lblFinder.setName("lblFinder"); // NOI18N
+        lblFinder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblFinderMouseClicked(evt);
+            }
+        });
+
+        lblSafari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sistoper/presentation/resources/Safari_51x51.png"))); // NOI18N
+        lblSafari.setText(bundle.getString("frmAdministradorProcesos.lblSafari.text")); // NOI18N
+        lblSafari.setName("lblSafari"); // NOI18N
+        lblSafari.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSafariMouseClicked(evt);
+            }
+        });
+
+        lblSetting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sistoper/presentation/resources/Setting_51x51.png"))); // NOI18N
+        lblSetting.setText(bundle.getString("frmAdministradorProcesos.lblSetting.text")); // NOI18N
+        lblSetting.setName("lblSetting"); // NOI18N
+        lblSetting.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSettingMouseClicked(evt);
+            }
+        });
+
+        lblTerminal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sistoper/presentation/resources/Terminal_51x51.png"))); // NOI18N
+        lblTerminal.setText(bundle.getString("frmAdministradorProcesos.lblTerminal.text")); // NOI18N
+        lblTerminal.setName("lblTerminal"); // NOI18N
+        lblTerminal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblTerminalMouseClicked(evt);
+            }
+        });
+
+        lblCal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sistoper/presentation/resources/iCal_51x51.png"))); // NOI18N
+        lblCal.setText(bundle.getString("frmAdministradorProcesos.lblCal.text")); // NOI18N
+        lblCal.setName("lblCal"); // NOI18N
+        lblCal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCalMouseClicked(evt);
+            }
+        });
+
+        lblItunes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sistoper/presentation/resources/iTunes_51x51.png"))); // NOI18N
+        lblItunes.setText(bundle.getString("frmAdministradorProcesos.lblItunes.text")); // NOI18N
+        lblItunes.setName("lblItunes"); // NOI18N
+        lblItunes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblItunesMouseClicked(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(lblEquipo)
+                    .add(lblFinder)
+                    .add(lblSafari)
+                    .add(lblSetting)
+                    .add(lblTerminal)
+                    .add(lblCal)
+                    .add(lblItunes))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 431, Short.MAX_VALUE)
                 .add(tpPrincipal, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 410, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(tpPrincipal, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 500, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(layout.createSequentialGroup()
+                        .add(lblEquipo)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(lblFinder)
+                        .add(18, 18, 18)
+                        .add(lblSafari)
+                        .add(18, 18, 18)
+                        .add(lblSetting)
+                        .add(18, 18, 18)
+                        .add(lblTerminal)
+                        .add(18, 18, 18)
+                        .add(lblCal)
+                        .add(18, 18, 18)
+                        .add(lblItunes))
+                    .add(tpPrincipal, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 500, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -384,6 +479,69 @@ private void btnReanudarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     this.reanudarProceso();
 }//GEN-LAST:event_btnReanudarActionPerformed
 
+private void lblEquipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEquipoMouseClicked
+// TODO add your handling code here:
+    List<Proceso> listaProcesos = new ArrayList<Proceso>();
+    IDespachador desp = BusinessFactory.getDespachador();
+    Proceso p1 = desp.crearProceso("Equipo.exe", 1, EstadoProceso.LISTO, 10000);
+    listaProcesos.add(p1);
+    desp.crearPrograma("MiPc", listaProcesos);   
+}//GEN-LAST:event_lblEquipoMouseClicked
+
+private void lblFinderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFinderMouseClicked
+// TODO add your handling code here:
+    List<Proceso> listaProcesos = new ArrayList<Proceso>();
+    IDespachador desp = BusinessFactory.getDespachador();
+    Proceso p1 = desp.crearProceso("Finder.exe", 1, EstadoProceso.LISTO, 10000);
+    listaProcesos.add(p1);
+    desp.crearPrograma("Finder", listaProcesos); 
+}//GEN-LAST:event_lblFinderMouseClicked
+
+private void lblSafariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSafariMouseClicked
+// TODO add your handling code here:
+    List<Proceso> listaProcesos = new ArrayList<Proceso>();
+    IDespachador desp = BusinessFactory.getDespachador();
+    Proceso p1 = desp.crearProceso("Safari.exe", 2, EstadoProceso.LISTO, 10000);
+    listaProcesos.add(p1);
+    desp.crearPrograma("Navegador", listaProcesos); 
+}//GEN-LAST:event_lblSafariMouseClicked
+
+private void lblSettingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSettingMouseClicked
+// TODO add your handling code here:
+    List<Proceso> listaProcesos = new ArrayList<Proceso>();
+    IDespachador desp = BusinessFactory.getDespachador();
+    Proceso p1 = desp.crearProceso("Settings.exe", 3, EstadoProceso.LISTO, 10000);
+    listaProcesos.add(p1);
+    desp.crearPrograma("Configuracion", listaProcesos); 
+}//GEN-LAST:event_lblSettingMouseClicked
+
+private void lblTerminalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTerminalMouseClicked
+// TODO add your handling code here:
+    List<Proceso> listaProcesos = new ArrayList<Proceso>();
+    IDespachador desp = BusinessFactory.getDespachador();
+    Proceso p1 = desp.crearProceso("Terminal.exe", 1, EstadoProceso.LISTO, 10000);
+    listaProcesos.add(p1);
+    desp.crearPrograma("Terminal", listaProcesos);     
+}//GEN-LAST:event_lblTerminalMouseClicked
+
+private void lblCalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCalMouseClicked
+// TODO add your handling code here:
+    List<Proceso> listaProcesos = new ArrayList<Proceso>();
+    IDespachador desp = BusinessFactory.getDespachador();
+    Proceso p1 = desp.crearProceso("iCal.exe", 6, EstadoProceso.LISTO, 10000);
+    listaProcesos.add(p1);
+    desp.crearPrograma("Calendario", listaProcesos); 
+}//GEN-LAST:event_lblCalMouseClicked
+
+private void lblItunesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblItunesMouseClicked
+// TODO add your handling code here:
+    List<Proceso> listaProcesos = new ArrayList<Proceso>();
+    IDespachador desp = BusinessFactory.getDespachador();
+    Proceso p1 = desp.crearProceso("iTunes.exe", 4, EstadoProceso.LISTO, 10000);
+    listaProcesos.add(p1);
+    desp.crearPrograma("iTunes", listaProcesos);     
+}//GEN-LAST:event_lblItunesMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Historial;
     private javax.swing.JButton btnFinalizar;
@@ -394,6 +552,13 @@ private void btnReanudarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblCal;
+    private javax.swing.JLabel lblEquipo;
+    private javax.swing.JLabel lblFinder;
+    private javax.swing.JLabel lblItunes;
+    private javax.swing.JLabel lblSafari;
+    private javax.swing.JLabel lblSetting;
+    private javax.swing.JLabel lblTerminal;
     private javax.swing.JPanel pAplicaciones;
     private javax.swing.JPanel pProcesos;
     private javax.swing.JPopupMenu pumProceso;
