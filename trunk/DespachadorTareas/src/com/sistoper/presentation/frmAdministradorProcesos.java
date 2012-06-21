@@ -198,14 +198,14 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
             pAplicacionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pAplicacionesLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pAplicacionesLayout.setVerticalGroup(
             pAplicacionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pAplicacionesLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -262,12 +262,12 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
             .add(pProcesosLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(pProcesosLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                     .add(pProcesosLayout.createSequentialGroup()
                         .add(btnSuspender)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(btnReanudar)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 146, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 35, Short.MAX_VALUE)
                         .add(btnFinalizar)))
                 .addContainerGap())
         );
@@ -281,7 +281,7 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
                     .add(btnSuspender)
                     .add(btnFinalizar)
                     .add(btnReanudar))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tpPrincipal.addTab("Procesos", pProcesos);
@@ -323,13 +323,13 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel4Layout.createSequentialGroup()
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -429,7 +429,7 @@ public class frmAdministradorProcesos extends javax.swing.JInternalFrame impleme
                     .add(lblTerminal)
                     .add(lblCal)
                     .add(lblItunes))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 431, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 160, Short.MAX_VALUE)
                 .add(tpPrincipal, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 410, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
