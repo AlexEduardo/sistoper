@@ -57,7 +57,7 @@
                   <Component id="lblCal" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="lblItunes" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="431" max="32767" attributes="0"/>
+              <EmptySpace pref="160" max="32767" attributes="0"/>
               <Component id="tpPrincipal" min="-2" pref="410" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -115,7 +115,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="385" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="349" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -124,7 +124,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="450" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="414" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -193,12 +193,12 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" alignment="0" pref="385" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" alignment="0" pref="349" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="btnSuspender" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnReanudar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="146" max="32767" attributes="0"/>
+                              <EmptySpace pref="35" max="32767" attributes="0"/>
                               <Component id="btnFinalizar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -217,7 +217,7 @@
                           <Component id="btnFinalizar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnReanudar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="36" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -360,7 +360,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane3" pref="349" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" pref="297" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -368,7 +368,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jScrollPane3" pref="409" max="32767" attributes="1"/>
+                          <Component id="jScrollPane3" pref="366" max="32767" attributes="1"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>

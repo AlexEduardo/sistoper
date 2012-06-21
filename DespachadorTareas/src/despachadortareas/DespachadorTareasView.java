@@ -128,8 +128,6 @@ public class DespachadorTareasView extends FrameView {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        miMiPC = new javax.swing.JMenuItem();
-        miRed = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
         statusPanel = new javax.swing.JPanel();
@@ -148,7 +146,7 @@ public class DespachadorTareasView extends FrameView {
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 547, Short.MAX_VALUE)
+            .addGap(0, 539, Short.MAX_VALUE)
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -169,6 +167,7 @@ public class DespachadorTareasView extends FrameView {
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(despachadortareas.DespachadorTareasApp.class).getContext().getActionMap(DespachadorTareasView.class, this);
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
+        exitMenuItem.setText(resourceMap.getString("exitMenuItem.text")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
         fileMenu.add(exitMenuItem);
 
@@ -195,30 +194,13 @@ public class DespachadorTareasView extends FrameView {
         });
         jMenu1.add(jMenuItem3);
 
-        miMiPC.setText(resourceMap.getString("miMiPC.text")); // NOI18N
-        miMiPC.setName("miMiPC"); // NOI18N
-        miMiPC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miMiPCActionPerformed(evt);
-            }
-        });
-        jMenu1.add(miMiPC);
-
-        miRed.setText(resourceMap.getString("miRed.text")); // NOI18N
-        miRed.setName("miRed"); // NOI18N
-        miRed.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miRedActionPerformed(evt);
-            }
-        });
-        jMenu1.add(miRed);
-
         menuBar.add(jMenu1);
 
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
         helpMenu.setName("helpMenu"); // NOI18N
 
         aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
+        aboutMenuItem.setText(resourceMap.getString("aboutMenuItem.text")); // NOI18N
         aboutMenuItem.setName("aboutMenuItem"); // NOI18N
         helpMenu.add(aboutMenuItem);
 
@@ -243,7 +225,7 @@ public class DespachadorTareasView extends FrameView {
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 705, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 679, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -265,16 +247,6 @@ public class DespachadorTareasView extends FrameView {
         setMenuBar(menuBar);
         setStatusBar(statusPanel);
     }// </editor-fold>//GEN-END:initComponents
-
-private void miMiPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMiPCActionPerformed
-// TODO add your handling code here:
-    List<Proceso> listaProcesos = new ArrayList<Proceso>();
-    IDespachador desp = BusinessFactory.getDespachador();
-    Proceso p1 = desp.crearProceso("Explorer.exe", 2, EstadoProceso.LISTO, 10000);
-    listaProcesos.add(p1);
-    
-    desp.crearPrograma("MiPc", listaProcesos);    
-}//GEN-LAST:event_miMiPCActionPerformed
 
 private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 // TODO add your handling code here:
@@ -300,16 +272,6 @@ private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     nuevaTarea.setVisible(true);
 }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-private void miRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRedActionPerformed
-// TODO add your handling code here:
-    List<Proceso> listaProcesos = new ArrayList<Proceso>();
-    IDespachador desp = BusinessFactory.getDespachador();
-    Proceso p1 = desp.crearProceso("Red.exe", 2, EstadoProceso.LISTO, 15000);
-    listaProcesos.add(p1);
-    
-    desp.crearPrograma("Red", listaProcesos); 
-}//GEN-LAST:event_miRedActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -317,8 +279,6 @@ private void miRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem miMiPC;
-    private javax.swing.JMenuItem miRed;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
